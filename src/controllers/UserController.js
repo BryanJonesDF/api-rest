@@ -15,7 +15,7 @@ class UserController {
     }
   }
 
-  // Lista todos os usuários
+  // Lista todos os usuários (rota desativada)
   async index(req, res) {
     try {
       const users = await User.findAll({
@@ -27,7 +27,7 @@ class UserController {
     }
   }
 
-  // Mostra um usuário
+  // Mostra um usuário (rota desativada)
   async show(req, res) {
     try {
       const user = await User.findByPk(req.params.id);
@@ -45,16 +45,10 @@ class UserController {
     }
   }
 
-  // Atualiza um usuário
+  // Atualiza o usuário logado
   async update(req, res) {
     try {
-      if (!req.params.id) {
-        return res.status(400).json({
-          errors: ['ID não enviado.'],
-        });
-      }
-
-      const user = await User.findByPk(req.params.id);
+      const user = await User.findByPk(req.userId);
 
       if (!user) {
         return res.status(404).json({
@@ -73,16 +67,10 @@ class UserController {
     }
   }
 
-  // Apaga um usuário
+  // Apaga o usuário logado
   async delete(req, res) {
     try {
-      if (!req.params.id) {
-        return res.status(400).json({
-          errors: ['ID não enviado.'],
-        });
-      }
-
-      const user = await User.findByPk(req.params.id);
+      const user = await User.findByPk(req.userId);
 
       if (!user) {
         return res.status(404).json({
