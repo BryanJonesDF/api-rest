@@ -3,3 +3,4 @@ node_modules
 uploads/**/*.jpg
 uploads/**/*.jpeg
 uploads/**/*.png
+dist
